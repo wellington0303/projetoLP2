@@ -3,25 +3,24 @@ package projeto;
 public class Cliente {
 	private int ID;
 	private String nome;
-	private int dataNascimento;
 	private	Endereco endereco;
 	private String telefone;
 	private String email;
-	private String identidade;
-	private String rg;
+	private int identidade;
+	private int rg;
 	private double renda;
 	private boolean statusConta;
 	
 	public Cliente() {
 		
 	}
-	public Cliente( String nome, int dataNascimento, String identidade, String rg ) {
+	public Cliente(String nome, int identidade, int rg ) {
 		this.nome = nome;
-		this.dataNascimento = dataNascimento;
 		this.identidade = identidade;
 		this.rg = rg;
 	}
 	
+		
 	public boolean CriarConta() {   // não implementado;
 		 // preciso de explicacao aqui, nao sei exatamente o que isso deve fazer.
 		try {
@@ -59,6 +58,10 @@ public class Cliente {
 	}
 	public int getID() {
 		return ID;
+	}
+	
+	public String getNome() {
+		return nome;
 	}
 	
 	
