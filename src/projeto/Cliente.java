@@ -63,7 +63,16 @@ public class Cliente {
 	public String getNome() {
 		return nome;
 	}
+	public void  setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public void setRenda(double renda) {
+		this.renda = renda;
+	}
 	
 }
 
