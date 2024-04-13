@@ -93,6 +93,7 @@ public class Main {
 					
 					System.out.println("2 - Criar conta");	
 					
+					//limitado ao escopo de "case 2:"
 					int idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
 					
