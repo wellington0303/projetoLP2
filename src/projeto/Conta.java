@@ -7,7 +7,7 @@ public class Conta {
 	protected double saldo;
 	protected Cliente titular;
 	protected String tipo;
-	protected int dataDeAbertura;
+	protected Data dataDeAbertura;
 	
 	Conta(){
 		super();
@@ -25,7 +25,7 @@ public class Conta {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("informe o numero da conta");
 		this.numero = scan.nextInt();
-		System.out.println("informe o numero da conta");
+		
 
 		
 		scan.close();
