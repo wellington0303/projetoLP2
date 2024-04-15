@@ -49,7 +49,7 @@ public class Cliente {
 	
 	
 		
-	public boolean criarConta() {   // não implementado;
+	public boolean criarConta(int ID, Conta [] lista) {   // não implementado;
 		 // preciso de explicacao aqui, nao sei exatamente o que isso deve fazer.
 		try {
 			// no caso tenho que crtiar uma rotina aqui pra iniciar um objeto conta?
@@ -61,7 +61,7 @@ public class Cliente {
 		}
 	}
 	
-	public boolean fecharConta() { // nao implementado;
+	public boolean fecharConta(int ID, Conta [] lista) { // nao implementado;
 		
 		try 
 		{

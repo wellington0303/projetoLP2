@@ -10,6 +10,11 @@ public class Data {
 		
 	}
 	
+	public Data(int dia, int mes, int ano) {
+		this.dia = dia;
+		this.mes = mes;
+		this.ano = ano;
+	}
 	public void informarData() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("informe o dia;");

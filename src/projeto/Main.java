@@ -16,10 +16,9 @@ public class Main {
 		System.out.println("8 - Verificar saldo");
 		System.out.println("9 - Realizar depósito (Corrente ou Poupança)");
 		System.out.println("10 - Realizar saque (Corrente ou Poupança)");
-		System.out.println("11 - Realizar transferência (Corrente)");
-		System.out.println("12 - Calcular juros acumulados (Poupança ou Investimento)");
-		System.out.println("13 - Investir (Investimento)");
-		System.out.println("14 - Resgatar (Investimento)");
+		System.out.println("11 - Calcular juros acumulados (Poupança ou Investimento)");
+		System.out.println("12 - Investir (Investimento)");
+		System.out.println("13 - Resgatar (Investimento)");
 		System.out.println("0 - FINALIZAR OPERAÇÕES");
 	}
 	
@@ -55,6 +54,7 @@ public class Main {
 		
 		int quantidadeClientes = 100; 
 		Cliente [] listaClientes = new Cliente[quantidadeClientes];
+		Conta [] listaContas = new Conta[quantidadeClientes];
 	
 		int op, idSelecionado;
 		int idControle = 0;
@@ -108,7 +108,7 @@ public class Main {
 					
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
-					if (listaClientes[idSelecionado].criarConta()) {
+					if (listaClientes[idSelecionado].criarConta(idSelecionado, listaContas)) {
 						System.out.println("Operação realizada com sucesso!");
 					
 					} else {
@@ -122,7 +122,7 @@ public class Main {
 										
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
-					if (listaClientes[idSelecionado].fecharConta()) {
+					if (listaClientes[idSelecionado].fecharConta(idSelecionado, listaContas)) {
 						System.out.println("Operação realizada com sucesso!");
 					
 					} else {
@@ -193,82 +193,133 @@ public class Main {
 					
 					break; 
 											
-					/* case 8:
+				case 8:
 					
 					System.out.println("8 - Verificar saldo");
 					
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
-					break; */
-						
-					/* case 9:
+					double valorSaldo = listaContas[idSelecionado].verificarSaldo();
 					
-					System.out.println("9 - Realizar depósito (Corrente ou Poupança)");
+					System.out.println("O saldo disponível é de " + valorSaldo + " reais.");
 					
+					break; 
 					
+				case 9:
 					
-					System.out.println("Digite o tipo de conta (C - corrente | P - poupança)");
-					char tipoConta = sc.nextLine().toUpperCase().charAt(0);
-					
-					
+					System.out.println("Digite o valor que deseja depositar: ");
+					double valorDeposito = sc_num.nextDouble();
 					
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
-					break; */
+					if (listaContas[idSelecionado] instanceof Corrente || listaContas[idSelecionado] instanceof Poupanca) {
 						
-					/* case 10:
+					    if (listaContas[idSelecionado].depositar(valorDeposito)) {
+					        System.out.println("Operação realizada com sucesso!");
+					        
+					    } else {
+					        System.out.println("Não foi possível realizar o depósito!");
+					    }
+					    
+					} else {
+					    System.out.println("Tipo de conta inválido para depósito!");
+					}
+				
+					break;
+														
+				case 10:
 					
-					System.out.println("10 - Realizar saque (Corrente ou Poupança)");
-					
-					
-					System.out.println("Digite o tipo de conta (C - corrente | P - poupança)");
-					tipoConta = sc.nextLine().toUpperCase().charAt(0);
+					System.out.println("Digite o valor que deseja sacar: ");
+					double valorSaque = sc_num.nextDouble();
 					
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
-					break; */
+					if (listaContas[idSelecionado] instanceof Corrente || listaContas[idSelecionado] instanceof Poupanca) {
 						
-					/* case 11:
+					    if (listaContas[idSelecionado].sacar(valorSaque)) {
+					        System.out.println("Operação realizada com sucesso!");
+					        
+					    } else {
+					        System.out.println("Não foi possível realizar o saque!");
+					    }
+					    
+					} else {
+					    System.out.println("Tipo de conta inválido para saque!");
+					}
 					
-					System.out.println("11 - Realizar transferência (Corrente)");
+					break; 
 					
+				case 11:
+												
+					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
+					
+					if (listaContas[idSelecionado] instanceof Investimento || listaContas[idSelecionado] instanceof Poupanca) {
+						
+					    System.out.println("Informe o dia base: ");
+					    int dia = sc_num.nextInt();
+					    	
+					    System.out.println("Informe o mês base: ");
+					    int mes = sc_num.nextInt();
+					    	
+					    System.out.println("Informe o ano base: ");
+					    int ano = sc_num.nextInt();
+					        
+					    Data dataCalculo = new Data (dia, mes, ano);
+					    	
+					    double valorJuros = listaContas[idSelecionado].calcularJuros(dataCalculo);
+					    
+					    System.out.println("O valor total dos juros até a data indicada é de " + valorJuros + " reais");	        
+					    
+					} else {
+					    System.out.println("Tipo de conta inválido para calcular os juros!");
+					}
+					
+					break; 
+						
+				case 12:
+					
+					System.out.println("Digite o valor que deseja investir: ");
+					double valorInvestimento = sc_num.nextDouble();
 					
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
-					
-					break; */
+					if (listaContas[idSelecionado] instanceof Investimento) {
 						
-					/* case 12:
-					
-					System.out.println("12 - Calcular juros acumulados (Poupança ou Investimento)");
-					
-					System.out.println("Digite o tipo de conta (P - poupança | I - Investimento)");
-					tipoConta = sc.nextLine().toUpperCase().charAt(0);
-					
-					
-					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
-					
-					break; */
-						
-					/* case 13:
-					
+					    if (listaContas[idSelecionado].investir(valorInvestimento)) {
+					        System.out.println("Operação realizada com sucesso!");
+					        
+					    } else {
+					        System.out.println("Não foi possível realizar o investimento!");
+					    }
+					    
+					} else {
+					    System.out.println("Tipo de conta inválido para investimento");
+					}
+				
+					break;
 
-					System.out.println("13 - Investir (Investimento)");
+				case 13:
+					
+					System.out.println("Digite o valor que deseja resgatar: ");
+					double valorResgate = sc_num.nextDouble();
 					
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
-					break; */
+					if (listaContas[idSelecionado] instanceof Investimento) {
 						
-					
-					/* case 14:
-					
-					System.out.println("14 - Resgatar (Investimento)");
-					
-					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
-					
-					
-					break; */
-						
+					    if (listaContas[idSelecionado].resgatar(valorResgate)) {
+					        System.out.println("Operação realizada com sucesso!");
+					        
+					    } else {
+					        System.out.println("Não foi possível realizar o resgate!");
+					    }
+					    
+					} else {
+					    System.out.println("Tipo de conta inválido para o resgate");
+					}
+				
+					break;
+							
 				default:
 					
 					System.out.println("OPERAÇÃO INVÁLIDA, ESCOLHA NOVAMENTE");
