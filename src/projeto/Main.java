@@ -24,7 +24,9 @@ public class Main {
 	}
 	
 	public static int selecaoID (Cliente [] listaClientes, int quantidadeClientes, Scanner sc) {
+		
 		for (int i = 0; i< quantidadeClientes; i++) {
+			
 			if (listaClientes != null) {
 				System.out.println("ID CLIENTE: " + listaClientes[i].getID() + " | NOME CLIENTE: " + listaClientes[i].getNome());
 			}
@@ -35,17 +37,26 @@ public class Main {
 		
 		idSelecionado --;
 		
+		while (listaClientes[idSelecionado] == null) {
+			
+			System.out.println("ID INVÁLIDO! Digite um novo valor: ");	
+			idSelecionado = sc.nextInt();
+			
+			idSelecionado --;
+			
+		}
 		return idSelecionado;
 	}
 
 	public static void main(String[] args) {
+		
 		Scanner sc = new Scanner(System.in);
 		Scanner sc_num = new Scanner(System.in);
 		
 		int quantidadeClientes = 100; 
 		Cliente [] listaClientes = new Cliente[quantidadeClientes];
 	
-		int op;
+		int op, idSelecionado;
 		int idControle = 0;
 		
 		do {
@@ -56,18 +67,20 @@ public class Main {
 			switch(op) {
 			
 				case 0:
+					
 					System.out.println("OBRIGADO POR UTILIZAR NOSSOS SERVIÇOS! ATENDIMENTO ENCERRADO");
 					break;
 					
 				case 1: 
+					
 					int novoID = idControle + 1;
 					
 					System.out.println("Digite o nome: ");
 					String nome = sc.nextLine();
 					
-					/* System.out.println("Digite o endereço: ");
-					String endereço = sc.nextLine(); */
-					
+					Endereco endereco = new Endereco();
+					endereco.cadastrarEndereco();
+									
 					System.out.println("Digite o telefone: ");
 					String telefone = sc.nextLine();
 					
@@ -82,8 +95,10 @@ public class Main {
 					
 					System.out.println("Digite a renda: ");
 					double renda = sc_num.nextDouble();
+					
+					boolean statusConta = false;
 				
-					listaClientes[idControle] = new Cliente(); // modificar para o construtor criado
+					listaClientes[idControle] = new Cliente(novoID, nome, endereco, telefone, email, identidade, rg, renda, statusConta); 
 					
 					idControle ++;	
 					
@@ -91,133 +106,102 @@ public class Main {
 					
 				case 2:
 					
-					System.out.println("2 - Criar conta");	
+					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
-					//limitado ao escopo de "case 2:"
-					int idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
+					if (listaClientes[idSelecionado].criarConta()) {
+						System.out.println("Operação realizada com sucesso!");
 					
-					
-					if (listaClientes[idSelecionado] != null) {
-						
 					} else {
-						System.out.println("Id não cadastrado!");
-					}
+						System.out.println("Não foi possível criar a conta!");
+						
+					}				
 					
 					break;
 						
 				case 3:
-					
-					System.out.println("3 - Fechar conta");
-					
-					
+										
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
+					if (listaClientes[idSelecionado].fecharConta()) {
+						System.out.println("Operação realizada com sucesso!");
 					
-					if (listaClientes[idSelecionado] != null) {
-						
 					} else {
-						System.out.println("Id não cadastrado!");
-					}
-					
+						System.out.println("Não foi possível fechar a conta!");
+						
+					}	
 					
 					break;
-						
+							
 				case 4:
-					
-					System.out.println("4 - Atualizar endereço");
 					
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
+					listaClientes[idSelecionado].cadastrarEndereco();
 					
-					if (listaClientes[idSelecionado] != null) {
-						
-						
-					} else {
-						System.out.println("Id não cadastrado!");
-					}
+					System.out.println("Operação realizada com sucesso!");				
 					
 					break;
 						
 				case 5:
 					
-					System.out.println("5 - Atualizar telefone");
-					
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
+					System.out.println("Digite o telefone: ");
+					telefone = sc.nextLine();
 					
-					if (listaClientes[idSelecionado] != null) {		
-						System.out.println("Digite o telefone: ");
-						telefone = sc.nextLine();
-						
-						listaClientes[idSelecionado].setTelefone(telefone);	
-						
-						System.out.println("Operação realizada!");
-						
+					if (listaClientes[idSelecionado].atualizarTelefone(telefone)) {
+						System.out.println("Operação realizada com sucesso!");
+					
 					} else {
-						System.out.println("Id não cadastrado!");
-					}
-									
+						System.out.println("Não foi possível atualizar o telefone!");
+						
+					}				
+								
 					break;
 						
 				case 6:
 					
-					System.out.println("6 - Atualizar email");
-					
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
+					System.out.println("Digite o email: ");
+					email = sc.nextLine();
 					
-					if (listaClientes[idSelecionado] != null) {
-						System.out.println("Digite o email: ");
-						email = sc.nextLine();
-						
-						listaClientes[idSelecionado].setEmail(email);	
-						
-						System.out.println("Operação realizada!");
-									
+					if (listaClientes[idSelecionado].atualizarEmail(email)) {
+						System.out.println("Operação realizada com sucesso!");
+					
 					} else {
-						System.out.println("Id não cadastrado!");
-					}
-					
-					break;
+						System.out.println("Não foi possível atualizar o email");
 						
+					}	
+					
+					break; 
+					
 				case 7:
 					
-					System.out.println("7 - Atualizar renda");
-					
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
+					System.out.println("Digite a renda: ");
+					renda = sc_num.nextDouble();
 					
-					if (listaClientes[idSelecionado] != null) {
-						
-						System.out.println("Digite a renda: ");
-						renda = sc_num.nextDouble();
-						
-						listaClientes[idSelecionado].setRenda(renda);
-						
-						System.out.println("Operação realizada!");
-						
+					if (listaClientes[idSelecionado].atualizarRenda(renda)) {
+						System.out.println("Operação realizada com sucesso!");
+					
 					} else {
-						System.out.println("Id não cadastrado!");
-					}
-					
-					break;
+						System.out.println("Não foi possível atualizar a renda");
 						
-				case 8:
+					}	
+					
+					break; 
+											
+					/* case 8:
 					
 					System.out.println("8 - Verificar saldo");
 					
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
-					
-					if (listaClientes[idSelecionado] != null) {
+					break; */
 						
-					} else {
-						System.out.println("Id não cadastrado!");
-					}
-					
-					break;
-						
-				case 9:
+					/* case 9:
 					
 					System.out.println("9 - Realizar depósito (Corrente ou Poupança)");
 					
@@ -230,16 +214,9 @@ public class Main {
 					
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
-					
-					if (listaClientes[idSelecionado] != null) {
+					break; */
 						
-					} else {
-						System.out.println("Id não cadastrado!");
-					}
-					
-					break;
-						
-				case 10:
+					/* case 10:
 					
 					System.out.println("10 - Realizar saque (Corrente ou Poupança)");
 					
@@ -249,16 +226,9 @@ public class Main {
 					
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
-					
-					if (listaClientes[idSelecionado] != null) {
+					break; */
 						
-					} else {
-						System.out.println("Id não cadastrado!");
-					}
-					
-					break;
-						
-				case 11:
+					/* case 11:
 					
 					System.out.println("11 - Realizar transferência (Corrente)");
 					
@@ -266,16 +236,9 @@ public class Main {
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
 					
-					if (listaClientes[idSelecionado] != null) {
+					break; */
 						
-					} else {
-						System.out.println("Id não cadastrado!");
-					}
-					
-					
-					break;
-						
-				case 12:
+					/* case 12:
 					
 					System.out.println("12 - Calcular juros acumulados (Poupança ou Investimento)");
 					
@@ -285,70 +248,35 @@ public class Main {
 					
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
-					
-					if (listaClientes[idSelecionado] != null) {
+					break; */
 						
-					} else {
-						System.out.println("Id não cadastrado!");
-					}
-					
-					break;
-						
-				case 13:
+					/* case 13:
 					
 
 					System.out.println("13 - Investir (Investimento)");
 					
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
-					
-					if (listaClientes[idSelecionado] != null) {
-						
-					} else {
-						System.out.println("Id não cadastrado!");
-					}
-					
-					break;
+					break; */
 						
 					
-				case 14:
+					/* case 14:
 					
 					System.out.println("14 - Resgatar (Investimento)");
 					
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
 					
-					if (listaClientes[idSelecionado] != null) {
-						
-					} else {
-						System.out.println("Id não cadastrado!");
-					}
-					
-					
-					break;
+					break; */
 						
 				default:
+					
 					System.out.println("OPERAÇÃO INVÁLIDA, ESCOLHA NOVAMENTE");
 					break;
 			} 
 			
-			
-			
-			
-			
-				
-			
-		
 		} while (op != 0); 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+				
 		sc.close();
 		sc_num.close();
 	}

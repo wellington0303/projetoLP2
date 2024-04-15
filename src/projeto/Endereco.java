@@ -19,25 +19,29 @@ public class Endereco {
 		this.estado = estado;
 		this.cep = cep;
 	}
-	public void AtualizarEndereco() {
-		Scanner scan = new Scanner(System.in);
+	public void cadastrarEndereco() {
 		
-		System.out.println("informe o logradouro: ");
+		Scanner scan = new Scanner(System.in);
+		Scanner scan_num = new Scanner(System.in);
+		
+		System.out.println("Informe o logradouro: ");
 		this.logradouro = scan.nextLine();
-		System.out.println("informe o bairro: ");
+		System.out.println("Informe o bairro: ");
 		this.bairro = scan.nextLine();
-		System.out.println("informe o cidade: ");
+		System.out.println("Informe o cidade: ");
 		this.cidade = scan.nextLine();
-		System.out.println("informe o estado: ");
+		System.out.println("Informe o estado: ");
 		this.estado = scan.nextLine();
-		System.out.println("informe o numero: ");
-		this.numero = scan.nextInt();
-		System.out.println("informe o cep: ");
+		System.out.println("Informe o numero: ");
+		this.numero = scan_num.nextInt();
+		System.out.println("Informe o cep: ");
 		this.cep = scan.nextLine();
 		
 		scan.close();
+		scan_num.close();
 	}
-	public void PrintarEndereco() {
+	public void imprimirEndereco() {
+		// organizar
 		System.out.println("logradouro:  " + this.logradouro);
 		System.out.println("bairro:  " + this.bairro);
 		System.out.println("cidade:  " + this.cidade);

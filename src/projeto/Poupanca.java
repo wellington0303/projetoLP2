@@ -9,7 +9,7 @@ public class Poupanca extends Conta {
 	Poupanca(){
 	}
 	
-	public boolean Sacar(double valor) {
+	public boolean sacar(double valor) {
 		if (super.VerificarSaldo(valor)){
 			super.saldo -= valor;
 			return true;
@@ -18,7 +18,7 @@ public class Poupanca extends Conta {
 		}
 	}
 	
-	public  boolean Depositar(double valor) {
+	public boolean depositar(double valor) {
 		try {
 			super.saldo += valor;
 			return true;
@@ -26,6 +26,10 @@ public class Poupanca extends Conta {
 		}catch(Exception e) {
 			return false;
 		}
+	}
+	
+	public double calcularJuros(Data dataAtual) {
+		return 0;
 	}
 }
 

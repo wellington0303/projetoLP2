@@ -10,7 +10,7 @@ public class Data {
 		
 	}
 	
-	public void InfoData() {
+	public void informarData() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("informe o dia;");
 		this.dia = scan.nextInt();

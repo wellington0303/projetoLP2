@@ -9,7 +9,7 @@ public class Investimento extends Conta{
 	Investimento(){
 		
 	}
-	public boolean Investir(double valor) {
+	public boolean investir(double valor) {
 		if (super.VerificarSaldo(valor)){
 			super.saldo -= valor;
 			return true;
@@ -17,7 +17,7 @@ public class Investimento extends Conta{
 			return false;
 		}
 	}
-	public  boolean Resgatar(double valor) {
+	public  boolean resgatar(double valor) {
 		try {
 			super.saldo += valor;
 			return true;
@@ -27,9 +27,9 @@ public class Investimento extends Conta{
 		}
 	}
 	
-	/*public boolean CalcularJuros() {//
+	public double calcularJuros(Data dataAtual) {
+		return 0;
 		
-		
-	}*/
+	}
 	
 }

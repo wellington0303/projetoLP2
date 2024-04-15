@@ -7,13 +7,18 @@ public class Conta {
 	protected double saldo;
 	protected Cliente titular;
 	protected String tipo;
-	protected Data dataDeAbertura;
+	protected Data dataAbertura;
 	
 	Conta(){
 		super();
 		this.id = this.titular.getID();
 	}
-	public boolean VerificarSaldo(double saldo) {
+	
+
+	
+	public double verificarSaldo() {
+		// método errado, retorna um double 
+		
 		if (saldo <= this.saldo) {
 			return true;
 		}else {
@@ -22,6 +27,8 @@ public class Conta {
 	}
 	
 	public void criarConta() {
+		
+		// acho que não é necessário
 		Scanner scan = new Scanner(System.in);
 		System.out.println("informe o numero da conta");
 		this.numero = scan.nextInt();

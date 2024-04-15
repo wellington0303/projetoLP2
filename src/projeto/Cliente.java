@@ -14,14 +14,42 @@ public class Cliente {
 	public Cliente() {
 		
 	}
-	public Cliente(String nome, int identidade, int rg ) {
+	
+	public Cliente(int iD, String nome, Endereco endereco, String telefone, String email, int identidade, int rg,
+			double renda, boolean statusConta) {
+		super();
+		ID = iD;
 		this.nome = nome;
+		this.endereco = endereco;
+		this.telefone = telefone;
+		this.email = email;
 		this.identidade = identidade;
 		this.rg = rg;
+		this.renda = renda;
+		this.statusConta = statusConta;
+	}
+
+
+
+
+
+	public int getID() {
+		return ID;
 	}
 	
+	public String getNome() {
+		return nome;
+	}
+	
+	// terminar get e set
+	
+	
+	
+	
+	
+	
 		
-	public boolean CriarConta() {   // não implementado;
+	public boolean criarConta() {   // não implementado;
 		 // preciso de explicacao aqui, nao sei exatamente o que isso deve fazer.
 		try {
 			// no caso tenho que crtiar uma rotina aqui pra iniciar um objeto conta?
@@ -33,7 +61,7 @@ public class Cliente {
 		}
 	}
 	
-	public boolean FecharConta(int id) { // nao implementado;
+	public boolean fecharConta() { // nao implementado;
 		
 		try 
 		{
@@ -47,32 +75,34 @@ public class Cliente {
 			
 		}
 	}
+
+
 	
-	public boolean AtualizarEndereco() {
-		try {
-			this.endereco.AtualizarEndereco();
-			return true;
-		}catch(Exception e) {
-			return false;
-		}
-	}
-	public int getID() {
-		return ID;
+	
+	public boolean atualizarTelefone(String telefone) {
+		
+		return false;
+		
 	}
 	
-	public String getNome() {
-		return nome;
-	}
-	public void  setTelefone(String telefone) {
-		this.telefone = telefone;
+	public boolean atualizarEmail(String email) {
+		
+		return false;
+		
 	}
 	
-	public void setEmail(String email) {
-		this.email = email;
+	
+	public boolean atualizarRenda(double renda) {
+		
+		return false;
+		
 	}
-	public void setRenda(double renda) {
-		this.renda = renda;
+
+	public void cadastrarEndereco() {
+		endereco.cadastrarEndereco();
 	}
+	
+
 	
 }
 
