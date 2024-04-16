@@ -21,31 +21,6 @@ public class Main {
 		System.out.println("13 - Resgatar (Investimento)");
 		System.out.println("0 - FINALIZAR OPERAÇÕES");
 	}
-	
-	public static int selecaoID (Cliente [] listaClientes, int quantidadeClientes, Scanner sc) {
-		
-		for (int i = 0; i< quantidadeClientes; i++) {
-			
-			if (listaClientes[i] != null) {
-				System.out.println("ID CLIENTE: " + listaClientes[i].getID() + " | NOME CLIENTE: " + listaClientes[i].getNome());
-			}
-		}
-		
-		System.out.println("Digite o ID do cliente: ");	
-		int idSelecionado = sc.nextInt();
-		
-		idSelecionado --;
-		
-		while (listaClientes[idSelecionado] == null) {
-			
-			System.out.println("ID INVÁLIDO! Digite um novo valor: ");	
-			idSelecionado = sc.nextInt();
-			
-			idSelecionado --;
-			
-		}
-		return idSelecionado;
-	}
 
 	public static void main(String[] args) {
 		
@@ -64,6 +39,8 @@ public class Main {
 				
 		int op, idSelecionado;
 		int idControle = 0;
+		
+		ID id = new ID();
 		
 		do {
 			
@@ -112,7 +89,7 @@ public class Main {
 					
 				case 2:
 					
-					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
+					idSelecionado = id.selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
 					if (listaClientes[idSelecionado].criarConta(idSelecionado, listaContas)) {
 						System.out.println("Operação realizada com sucesso!");
@@ -126,7 +103,7 @@ public class Main {
 						
 				case 3:
 										
-					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
+					idSelecionado = id.selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
 					if (listaClientes[idSelecionado].fecharConta(idSelecionado, listaContas)) {
 						System.out.println("Operação realizada com sucesso!");
@@ -140,7 +117,7 @@ public class Main {
 							
 				case 4:
 					
-					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
+					idSelecionado = id.selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
 					listaClientes[idSelecionado].cadastrarEndereco();
 					
@@ -150,7 +127,7 @@ public class Main {
 						
 				case 5:
 					
-					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
+					idSelecionado = id.selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
 					System.out.println("Digite o telefone: ");
 					telefone = sc.nextLine();
@@ -167,7 +144,7 @@ public class Main {
 						
 				case 6:
 					
-					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
+					idSelecionado = id.selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
 					System.out.println("Digite o email: ");
 					email = sc.nextLine();
@@ -184,7 +161,7 @@ public class Main {
 					
 				case 7:
 					
-					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
+					idSelecionado = id.selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
 					System.out.println("Digite a renda: ");
 					renda = sc_num.nextDouble();
@@ -201,7 +178,7 @@ public class Main {
 											
 				case 8:
 										
-					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
+					idSelecionado = id.selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
 					double valorSaldo = listaContas[idSelecionado].verificarSaldo();
 					
@@ -214,7 +191,7 @@ public class Main {
 					System.out.println("Digite o valor que deseja depositar: ");
 					double valorDeposito = sc_num.nextDouble();
 					
-					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
+					idSelecionado = id.selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
 					if (listaContas[idSelecionado] instanceof Corrente || listaContas[idSelecionado] instanceof Poupanca) {
 						
@@ -250,7 +227,7 @@ public class Main {
 					System.out.println("Digite o valor que deseja sacar: ");
 					double valorSaque = sc_num.nextDouble();
 					
-					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
+					idSelecionado = id.selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
 					if (listaContas[idSelecionado] instanceof Corrente || listaContas[idSelecionado] instanceof Poupanca) {
 						
@@ -282,7 +259,7 @@ public class Main {
 					
 				case 11:
 												
-					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
+					idSelecionado = id.selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
 					if (listaContas[idSelecionado] instanceof Investimento || listaContas[idSelecionado] instanceof Poupanca) {
 						double valorJuros;
@@ -321,7 +298,7 @@ public class Main {
 					System.out.println("Digite o valor que deseja investir: ");
 					double valorInvestimento = sc_num.nextDouble();
 					
-					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
+					idSelecionado = id.selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
 					if (listaContas[idSelecionado] instanceof Investimento) {
 						
@@ -345,7 +322,7 @@ public class Main {
 					System.out.println("Digite o valor que deseja resgatar: ");
 					double valorResgate = sc_num.nextDouble();
 					
-					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
+					idSelecionado = id.selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
 					if (listaContas[idSelecionado] instanceof Investimento) {
 						
