@@ -1,5 +1,7 @@
 package projeto;
+
 import java.util.Scanner;
+
 public class Conta {
 	
 	protected int id;
@@ -9,13 +11,13 @@ public class Conta {
 	protected String tipo;
 	protected Data dataAbertura;
 	
-	Conta(){
+	public Conta(){
+	}
+	
+	public Conta(int id){
 		super();
 		this.id = this.titular.getID();
 	}
-	
-	
-	
 	
 	public Conta(int id, int numero, double saldo, Cliente titular, String tipo, Data dataAbertura) {
 		super();
@@ -26,37 +28,69 @@ public class Conta {
 		this.tipo = tipo;
 		this.dataAbertura = dataAbertura;
 	}
+	
+	public int getId() {
+		return id;
+	}
 
-	public Conta(int id, int numero, double saldo, Cliente titular, String tipo) {
-		super();
+	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
 		this.numero = numero;
+	}
+
+	public double getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(double saldo) {
 		this.saldo = saldo;
+	}
+
+	public Cliente getTitular() {
+		return titular;
+	}
+
+	public void setTitular(Cliente titular) {
 		this.titular = titular;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 
+	public Data getDataAbertura() {
+		return dataAbertura;
+	}
 
-	public double verificarSaldo() {
-		// método errado, retorna um double 
-		
+	public void setDataAbertura(Data dataAbertura) {
+		this.dataAbertura = dataAbertura;
+	}
+
+	public boolean verificarSaldo(double saldo) {
 		if (saldo <= this.saldo) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
 	
 	public void criarConta() {
-		
-		// acho que não é necessário
 		Scanner scan = new Scanner(System.in);
 		System.out.println("informe o numero da conta");
 		this.numero = scan.nextInt();
 		
-
-		
 		scan.close();
 	}
-
+	
 }

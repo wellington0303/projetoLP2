@@ -19,6 +19,55 @@ public class Endereco {
 		this.estado = estado;
 		this.cep = cep;
 	}
+	
+	public String getLogradouro() {
+		return logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
 	public void cadastrarEndereco() {
 		
 		Scanner scan = new Scanner(System.in);
@@ -40,13 +89,13 @@ public class Endereco {
 		scan.close();
 		scan_num.close();
 	}
+	
 	public void imprimirEndereco() {
-		// organizar
-		System.out.println("logradouro:  " + this.logradouro);
-		System.out.println("bairro:  " + this.bairro);
-		System.out.println("cidade:  " + this.cidade);
-		System.out.println("estado:  " + this.estado);
-		System.out.println("numero:  " + this.numero);
-		System.out.println("CEP:  " + this.cep);
+		System.out.println("Logradouro:  " + logradouro);
+		System.out.println("Bairro:  " + bairro);
+		System.out.println("Cidade:  " + cidade);
+		System.out.println("Estado:  " + estado);
+		System.out.println("Número:  " + numero);
+		System.out.println("CEP:  " + cep);
 	}
 }

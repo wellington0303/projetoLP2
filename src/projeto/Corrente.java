@@ -4,11 +4,8 @@ public class Corrente extends Conta {
 	double taxaJuros;
 	double limiteSaque;
 	
-	Corrente(){
-		
+	Corrente(){	
 	}
-	
-	
 	
 	public Corrente(int id, int numero, double saldo, Cliente titular, String tipo, Data dataAbertura, double taxaJuros,
 			double limiteSaque) {
@@ -17,47 +14,45 @@ public class Corrente extends Conta {
 		this.limiteSaque = limiteSaque;
 	}
 	
-	
-	public Corrente(int id, int numero, double saldo, Cliente titular, String tipo, double taxaJuros,
-			double limiteSaque) {
-		super(id, numero, saldo, titular, tipo);
+	public double getTaxaJuros() {
+		return taxaJuros;
+	}
+
+	public void setTaxaJuros(double taxaJuros) {
 		this.taxaJuros = taxaJuros;
+	}
+
+	public double getLimiteSaque() {
+		return limiteSaque;
+	}
+
+	public void setLimiteSaque(double limiteSaque) {
 		this.limiteSaque = limiteSaque;
 	}
 
-
-
 	public boolean sacar(double valor) {
 		
-		
-		
-		
-		
-		if (super.VerificarSaldo(valor)){
+		if (super.verificarSaldo(valor)){
 			super.saldo -= valor;
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
 	
 	public  boolean depositar(double valor) {
 		
-		System.out.println("Saldo: " + saldo);
-		
-		saldo += valor;
-		
-		System.out.println("Saldo: " + saldo);
-		
-		return true;
-		
-		
-		/*try {
+		if (valor > 0) {
 			super.saldo += valor;
 			return true;
-		}catch(Exception e) {
+		} else {
 			return false;
-		}*/
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "ID = " + id + ", Número = " + numero + ", Saldo = " + saldo + ", Titular = " + titular + ", Tipo = " + tipo;
 	}
 	
 }

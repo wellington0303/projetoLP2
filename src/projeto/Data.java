@@ -7,15 +7,28 @@ public class Data {
 	private int ano;
 	
 	Data(){
-		
 	}
 	
 	public Data(int dia, int mes, int ano) {
+		super();
 		this.dia = dia;
 		this.mes = mes;
 		this.ano = ano;
 	}
-	public void informarData() {
+
+	public int getDia() {
+		return dia;
+	}
+
+	public int getMes() {
+		return mes;
+	}
+
+	public int getAno() {
+		return ano;
+	}
+
+	public void infoData() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("informe o dia;");
 		this.dia = scan.nextInt();
@@ -25,13 +38,5 @@ public class Data {
 		this.ano = scan.nextInt();
 		
 		scan.close();
-	}
-	
-	/**
-	 * 
-	 * @return um vetor com de tamanho 3 com dia, mes e ano respectivamente.
-	 */
-	public int[] getData() {
-		return new int[] {this.dia, this.mes, this.ano};
 	}
 }
