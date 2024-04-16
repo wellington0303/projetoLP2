@@ -15,10 +15,10 @@ public class Cliente {
 		
 	}
 	
+	
 	public Cliente(int iD, String nome, Endereco endereco, String telefone, String email, int identidade, int rg,
 			double renda, boolean statusConta) {
-		super();
-		ID = iD;
+		this.ID = iD;
 		this.nome = nome;
 		this.endereco = endereco;
 		this.telefone = telefone;
@@ -30,7 +30,17 @@ public class Cliente {
 	}
 
 
-
+	public Cliente(int iD, String nome, String telefone, String email, int identidade, int rg,
+			double renda, boolean statusConta) {
+		this.ID = iD;
+		this.nome = nome;
+		this.telefone = telefone;
+		this.email = email;
+		this.identidade = identidade;
+		this.rg = rg;
+		this.renda = renda;
+		this.statusConta = statusConta;
+	}
 
 
 	public int getID() {

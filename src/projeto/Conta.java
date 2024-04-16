@@ -14,8 +14,29 @@ public class Conta {
 		this.id = this.titular.getID();
 	}
 	
-
 	
+	
+	
+	public Conta(int id, int numero, double saldo, Cliente titular, String tipo, Data dataAbertura) {
+		super();
+		this.id = id;
+		this.numero = numero;
+		this.saldo = saldo;
+		this.titular = titular;
+		this.tipo = tipo;
+		this.dataAbertura = dataAbertura;
+	}
+
+	public Conta(int id, int numero, double saldo, Cliente titular, String tipo) {
+		super();
+		this.id = id;
+		this.numero = numero;
+		this.saldo = saldo;
+		this.titular = titular;
+		this.tipo = tipo;
+	}
+
+
 	public double verificarSaldo() {
 		// método errado, retorna um double 
 		

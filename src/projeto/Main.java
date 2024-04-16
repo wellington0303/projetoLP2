@@ -26,7 +26,7 @@ public class Main {
 		
 		for (int i = 0; i< quantidadeClientes; i++) {
 			
-			if (listaClientes != null) {
+			if (listaClientes[i] != null) {
 				System.out.println("ID CLIENTE: " + listaClientes[i].getID() + " | NOME CLIENTE: " + listaClientes[i].getNome());
 			}
 		}
@@ -56,6 +56,12 @@ public class Main {
 		Cliente [] listaClientes = new Cliente[quantidadeClientes];
 		Conta [] listaContas = new Conta[quantidadeClientes];
 	
+		listaClientes[0] = new Cliente(1, "aaa","123","aaa",123,123,123,false);
+		listaContas[0] = new Investimento(1,123,100,listaClientes[0],"investimento",100,1);
+		
+		listaClientes[1] = new Cliente(2, "aaa","123","aaa",123,123,123,false);
+		listaContas[1] = new Corrente(2,123,100,listaClientes[0],"corrente",1,100);
+				
 		int op, idSelecionado;
 		int idControle = 0;
 		
@@ -78,9 +84,6 @@ public class Main {
 					System.out.println("Digite o nome: ");
 					String nome = sc.nextLine();
 					
-					Endereco endereco = new Endereco();
-					endereco.cadastrarEndereco();
-									
 					System.out.println("Digite o telefone: ");
 					String telefone = sc.nextLine();
 					
@@ -96,13 +99,16 @@ public class Main {
 					System.out.println("Digite a renda: ");
 					double renda = sc_num.nextDouble();
 					
+					Endereco endereco = new Endereco();
+					endereco.cadastrarEndereco();
+					
 					boolean statusConta = false;
 				
 					listaClientes[idControle] = new Cliente(novoID, nome, endereco, telefone, email, identidade, rg, renda, statusConta); 
 					
 					idControle ++;	
 					
-					break;
+					break; 
 					
 				case 2:
 					
@@ -194,16 +200,14 @@ public class Main {
 					break; 
 											
 				case 8:
-					
-					System.out.println("8 - Verificar saldo");
-					
+										
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
 					double valorSaldo = listaContas[idSelecionado].verificarSaldo();
 					
 					System.out.println("O saldo disponível é de " + valorSaldo + " reais.");
 					
-					break; 
+					break;
 					
 				case 9:
 					
@@ -214,17 +218,31 @@ public class Main {
 					
 					if (listaContas[idSelecionado] instanceof Corrente || listaContas[idSelecionado] instanceof Poupanca) {
 						
-					    if (listaContas[idSelecionado].depositar(valorDeposito)) {
-					        System.out.println("Operação realizada com sucesso!");
-					        
-					    } else {
-					        System.out.println("Não foi possível realizar o depósito!");
-					    }
-					    
+						boolean operacao;
+						
+						if (listaContas[idSelecionado] instanceof Corrente) {
+							
+							Corrente lista = (Corrente)listaContas[idSelecionado];
+							operacao = lista.depositar(valorDeposito);
+
+						} else {
+							
+							Poupanca lista = (Poupanca)listaContas[idSelecionado];
+							operacao = lista.depositar(valorDeposito); 	
+						}
+									
+						if (operacao) {
+						    System.out.println("Operação realizada com sucesso!");
+						        
+						} else {
+							System.out.println("Não foi possível realizar o depósito!");
+						}
+						
 					} else {
 					    System.out.println("Tipo de conta inválido para depósito!");
+					
 					}
-				
+					
 					break;
 														
 				case 10:
@@ -236,13 +254,26 @@ public class Main {
 					
 					if (listaContas[idSelecionado] instanceof Corrente || listaContas[idSelecionado] instanceof Poupanca) {
 						
-					    if (listaContas[idSelecionado].sacar(valorSaque)) {
-					        System.out.println("Operação realizada com sucesso!");
-					        
-					    } else {
-					        System.out.println("Não foi possível realizar o saque!");
-					    }
-					    
+						boolean operacao;
+						
+						if (listaContas[idSelecionado] instanceof Corrente) {
+							
+							Corrente lista = (Corrente)listaContas[idSelecionado];
+							operacao = lista.sacar(valorSaque);
+
+						} else {
+							
+							Poupanca lista = (Poupanca)listaContas[idSelecionado];
+							operacao = lista.sacar(valorSaque);
+						}
+															
+						if (operacao) {
+						    System.out.println("Operação realizada com sucesso!");
+						        
+						} else {
+							System.out.println("Não foi possível realizar o depósito!");
+						}
+						
 					} else {
 					    System.out.println("Tipo de conta inválido para saque!");
 					}
@@ -254,7 +285,7 @@ public class Main {
 					idSelecionado = selecaoID(listaClientes, quantidadeClientes, sc_num);
 					
 					if (listaContas[idSelecionado] instanceof Investimento || listaContas[idSelecionado] instanceof Poupanca) {
-						
+						double valorJuros;
 					    System.out.println("Informe o dia base: ");
 					    int dia = sc_num.nextInt();
 					    	
@@ -266,7 +297,16 @@ public class Main {
 					        
 					    Data dataCalculo = new Data (dia, mes, ano);
 					    	
-					    double valorJuros = listaContas[idSelecionado].calcularJuros(dataCalculo);
+					    if (listaContas[idSelecionado] instanceof Investimento) {
+							
+							Investimento lista = (Investimento)listaContas[idSelecionado];
+							valorJuros = lista.calcularJuros(dataCalculo);
+
+						} else {
+							
+							Poupanca lista = (Poupanca)listaContas[idSelecionado];
+							valorJuros = lista.calcularJuros(dataCalculo);
+						}
 					    
 					    System.out.println("O valor total dos juros até a data indicada é de " + valorJuros + " reais");	        
 					    
@@ -285,7 +325,9 @@ public class Main {
 					
 					if (listaContas[idSelecionado] instanceof Investimento) {
 						
-					    if (listaContas[idSelecionado].investir(valorInvestimento)) {
+						Investimento lista = (Investimento)listaContas[idSelecionado];
+						
+					    if (lista.investir(valorInvestimento)) {
 					        System.out.println("Operação realizada com sucesso!");
 					        
 					    } else {
@@ -307,7 +349,9 @@ public class Main {
 					
 					if (listaContas[idSelecionado] instanceof Investimento) {
 						
-					    if (listaContas[idSelecionado].resgatar(valorResgate)) {
+						Investimento lista = (Investimento)listaContas[idSelecionado];
+						
+					    if (lista.resgatar(valorResgate)) {
 					        System.out.println("Operação realizada com sucesso!");
 					        
 					    } else {
