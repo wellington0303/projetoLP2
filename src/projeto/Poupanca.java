@@ -2,46 +2,50 @@ package projeto;
 
 public class Poupanca extends Conta {
 	private double taxaJuros;
-	private double rendimentoMensal;
 	private double jurosAcumulados;
-	double limiteSaque;
 	private Data data; 
 	
 	public Poupanca(){
 	}
 	
-	public Poupanca(int id, int numero, double saldo, Cliente titular, String tipo, Data dataAbertura) {
+	public Poupanca(int id, int numero, double saldo, Cliente titular, String tipo, Data dataAbertura, double taxaJuros, double jurosAcumulados, Data data) {
 		super(id, numero, saldo, tipo, dataAbertura);
-		this.taxaJuros = 10;
-		this.rendimentoMensal = 0.5;
-		this.jurosAcumulados = 0;
-		this.limiteSaque = 800;
+		this.taxaJuros = taxaJuros;
+		this.jurosAcumulados = jurosAcumulados;
+		this.data = data;
 	}
-
+	
 	public double getTaxaJuros() {
 		return taxaJuros;
 	}
 
-	public double getRendimentoMensal() {
-		return rendimentoMensal;
+	public void setTaxaJuros(double taxaJuros) {
+		this.taxaJuros = taxaJuros;
 	}
 
-	public double getLimiteSaque() {
-		return limiteSaque;
+	public double getJurosAcumulados() {
+		return jurosAcumulados;
+	}
+
+	public void setJurosAcumulados(double jurosAcumulados) {
+		this.jurosAcumulados = jurosAcumulados;
 	}
 
 	public Data getData() {
 		return data;
 	}
 
+	public void setData(Data data) {
+		this.data = data;
+	}
+
 	public boolean sacar(double valor) {
 		
-		double valorSaque = valor + taxaJuros;
+		double taxa = 5; 
 		
-		if (valorSaque <= saldo && valor <= limiteSaque){	
-			super.saldo -= valorSaque;
+		if (valor + taxa <= saldo){	
+			super.saldo -= valor + taxa;
 			return true;
-			
 		}else {
 			return false;
 		}
@@ -49,37 +53,27 @@ public class Poupanca extends Conta {
 	
 	public boolean depositar(double valor) {
 		
-		if (valor > 0) {
-			super.saldo += valor;
+		double novoValor = rendimento() * 0.5;
+		
+		if (novoValor > 0) {
+			super.saldo += novoValor;
 			return true;
-			
 		} else {
 			return false;
 		}
 	}
 	
-	public double calcularJuros() {
-	
-		data.infoData();
+	public int rendimento() {
 		
-		int data1 = super.dataAbertura.getDia() + (super.dataAbertura.getMes() * 30) + (super.dataAbertura.getAno() * 365);
-		int data2 = data.getDia() + (data.getMes() * 30) + (data.getAno()* 365);
+		int data1 = super.dataAbertura.getDia() + (super.dataAbertura.getMes() * 30) + (super.dataAbertura.getMes() * 365);
+		int data2 =data.getDia() + (data.getMes() * 30) + (data.getMes() * 365);
 		
 		int quantidadeDias = data2 - data1;
+		return quantidadeDias;
+				 
 				
-	    double rendimentoDiario = (Math.pow(1 + rendimentoMensal, 1.0 / 30) - 1)/100;
-	    
-	    double saldoFinal = saldo * (1 + rendimentoDiario*quantidadeDias);
-	    
-	    this.jurosAcumulados = saldoFinal - saldo;
-	    
-	    return jurosAcumulados;
 		
-	}
-	
-	@Override
-	public String toString() {
-		return "ID = " + ID + ", Número = " + numero + ", Saldo = " + saldo + ", Titular = " + titular + ", Tipo = " + tipo;
+		
 	}
 }
 

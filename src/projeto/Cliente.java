@@ -40,8 +40,16 @@ public class Cliente {
 		return ID;
 	}
 
+	public void setID(int iD) {
+		this.ID = iD;
+	}
+
 	public String getNome() {
 		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public Endereco getEndereco() {
@@ -60,8 +68,16 @@ public class Cliente {
 		return identidade;
 	}
 
+	public void setIdentidade(int identidade) {
+		this.identidade = identidade;
+	}
+
 	public int getRg() {
 		return rg;
+	}
+
+	public void setRg(int rg) {
+		this.rg = rg;
 	}
 
 	public double getRenda() {
@@ -72,24 +88,34 @@ public class Cliente {
 		return statusConta;
 	}
 
-	public void atualizarTelefone(String telefone) {	
-		this.telefone = telefone;	
+	public boolean atualizarTelefone(String telefone) {
+		
+		this.telefone = telefone;
+		
+		return false;
+		
 	}
 	
-	public void atualizarEmail(String email) {		
+	public boolean atualizarEmail(String email) {
+		
 		this.email = email;
-			
+		
+		return false;
+		
 	}
 	
-	public void atualizarRenda(double renda) {
+	public boolean atualizarRenda(double renda) {
+		
 		this.renda = renda;
+		
+		return false;		
 	}
 
-	public void cadastrarCliente(int ID) {
+	
+	
+	public void cadastrarCliente() {
 		Scanner sc = new Scanner(System.in);
 		Scanner sc_num = new Scanner(System.in);
-		
-		this.ID = ID;
 		
 		System.out.println("Digite o nome: ");
 		this.nome = sc.nextLine();
@@ -117,18 +143,28 @@ public class Cliente {
 		sc_num.close();
 	
 	}
-	
-	public void imprimirCliente() {	
-		System.out.println("ID: " + ID);
-		System.out.println("Nome: " + nome);
-		System.out.println("Telefone: " + telefone);
-		System.out.println("Email: " + email);
-		System.out.println("Identidade: " + identidade);
-		System.out.println("RG: " + rg);	
-		System.out.println("Renda: " + renda);		
+	public void printCliente() {
+		System.out.println("nome: " + nome);
+		
+		System.out.println("telefone: " + telefone);
+		
+		System.out.println("email: " + email);
+		
+		System.out.println("identidade: " + identidade);
+		
+		System.out.println("rg: " + rg);
+		
+		System.out.println("renda: " + renda);
+		
 		endereco.imprimirEndereco();
 	}
+	
 
+	@Override
+	public String toString() {
+		return "ID = " + ID + ", Nome = " + nome + ", Telefone=" + telefone + ", Email=" + email;
+	}
+	
 }
 
 
