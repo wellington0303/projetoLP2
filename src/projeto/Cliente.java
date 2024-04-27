@@ -1,5 +1,7 @@
 package projeto;
 
+import java.util.Scanner;
+
 public class Cliente {
 	private int ID;
 	private String nome;
@@ -23,7 +25,7 @@ public class Cliente {
 	
 	public Cliente(int iD, String nome, Endereco endereco, String telefone, String email, int identidade, int rg,
 			double renda, boolean statusConta) {
-		ID = iD;
+		this.ID = iD;
 		this.nome = nome;
 		this.endereco = endereco;
 		this.telefone = telefone;
@@ -38,16 +40,8 @@ public class Cliente {
 		return ID;
 	}
 
-	public void setID(int iD) {
-		ID = iD;
-	}
-
 	public String getNome() {
 		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 	public Endereco getEndereco() {
@@ -66,16 +60,8 @@ public class Cliente {
 		return identidade;
 	}
 
-	public void setIdentidade(int identidade) {
-		this.identidade = identidade;
-	}
-
 	public int getRg() {
 		return rg;
-	}
-
-	public void setRg(int rg) {
-		this.rg = rg;
 	}
 
 	public double getRenda() {
@@ -86,54 +72,63 @@ public class Cliente {
 		return statusConta;
 	}
 
-	public boolean criarConta(int ID, Conta [] lista) {  
-
-		// IMPLEMENTAR
-		
-		return false;
-	
+	public void atualizarTelefone(String telefone) {	
+		this.telefone = telefone;	
 	}
 	
-	public boolean fecharConta(int ID, Conta [] lista) { 
-		
-		// IMPLEMENTAR
-		
-		return false;	
+	public void atualizarEmail(String email) {		
+		this.email = email;
+			
+	}
+	
+	public void atualizarRenda(double renda) {
+		this.renda = renda;
 	}
 
-	public boolean atualizarTelefone(String telefone) {
+	public void cadastrarCliente(int ID) {
+		Scanner sc = new Scanner(System.in);
+		Scanner sc_num = new Scanner(System.in);
 		
-		// IMPLEMENTAR
+		this.ID = ID;
 		
-		return false;
+		System.out.println("Digite o nome: ");
+		this.nome = sc.nextLine();
 		
-	}
-	
-	public boolean atualizarEmail(String email) {
+		System.out.println("Digite o telefone: ");
+		this.telefone = sc.nextLine();
 		
-		// IMPLEMENTAR
+		System.out.println("Digite o email: ");
+		this.email = sc.nextLine();
 		
-		return false;
+		System.out.println("Digite a identidade: ");
+		this.identidade = sc_num.nextInt();
 		
-	}
-	
-	
-	public boolean atualizarRenda(double renda) {
+		System.out.println("Digite o rg: ");
+		this.rg = sc_num.nextInt();
 		
-		// IMPLEMENTAR
+		System.out.println("Digite a renda: ");
+		this.renda = sc_num.nextDouble();
 		
-		return false;		
-	}
-
-	public void cadastrarEndereco() {
 		endereco.cadastrarEndereco();
-	}
-
-	@Override
-	public String toString() {
-		return "ID = " + ID + ", Nome = " + nome + ", Telefone=" + telefone + ", Email=" + email +  ", statusConta=" + statusConta + "]";
+		
+		statusConta = false;
+		
+		sc.close();
+		sc_num.close();
+	
 	}
 	
+	public void imprimirCliente() {	
+		System.out.println("ID: " + ID);
+		System.out.println("Nome: " + nome);
+		System.out.println("Telefone: " + telefone);
+		System.out.println("Email: " + email);
+		System.out.println("Identidade: " + identidade);
+		System.out.println("RG: " + rg);	
+		System.out.println("Renda: " + renda);		
+		endereco.imprimirEndereco();
+	}
+
 }
 
 

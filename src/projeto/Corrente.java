@@ -7,44 +7,39 @@ public class Corrente extends Conta {
 	Corrente(){	
 	}
 	
-	public Corrente(int id, int numero, double saldo, Cliente titular, String tipo, Data dataAbertura, double taxaJuros,
-			double limiteSaque) {
-		super(id, numero, saldo, titular, tipo, dataAbertura);
-		this.taxaJuros = taxaJuros;
-		this.limiteSaque = limiteSaque;
+	public Corrente(int id, int numero, double saldo, String tipo, Data dataAbertura) {
+		super(id, numero, saldo, tipo, dataAbertura);
+		this.taxaJuros = 5;
+		this.limiteSaque = 1000;
 	}
 	
 	public double getTaxaJuros() {
 		return taxaJuros;
 	}
 
-	public void setTaxaJuros(double taxaJuros) {
-		this.taxaJuros = taxaJuros;
-	}
-
 	public double getLimiteSaque() {
 		return limiteSaque;
 	}
 
-	public void setLimiteSaque(double limiteSaque) {
-		this.limiteSaque = limiteSaque;
-	}
-
 	public boolean sacar(double valor) {
 		
-		if (super.verificarSaldo(valor)){
-			super.saldo -= valor;
+		double novoValor = valor + taxaJuros;
+
+		if (novoValor <= saldo && valor <= limiteSaque) {
+			super.saldo -= novoValor;
 			return true;
+			
 		} else {
 			return false;
 		}
 	}
-	
+
 	public  boolean depositar(double valor) {
 		
 		if (valor > 0) {
 			super.saldo += valor;
 			return true;
+			
 		} else {
 			return false;
 		}
@@ -52,7 +47,7 @@ public class Corrente extends Conta {
 
 	@Override
 	public String toString() {
-		return "ID = " + id + ", Número = " + numero + ", Saldo = " + saldo + ", Titular = " + titular + ", Tipo = " + tipo;
+		return "ID = " + ID + ", Número = " + numero + ", Saldo = " + saldo + ", Titular = " + titular + ", Tipo = " + tipo;
 	}
 	
 }
