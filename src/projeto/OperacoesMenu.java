@@ -23,9 +23,9 @@ public class OperacoesMenu {
 		System.out.println("0 - FINALIZAR OPERAÇÕES");
 	}
 	
-	public int selecaoID (Conta [] listaConta, int quantidadeClientes, Scanner sc) {
+	public int selecaoID (Conta [] listaConta, Scanner sc) {
 		
-		for (int i = 0; i< quantidadeClientes; i++) {
+		for (int i = 0; i< listaConta.length; i++) {
 			
 			if (listaConta[i] != null) {
 				System.out.println("ID CLIENTE: " + listaConta[i].getID() + " | NOME CLIENTE: " + listaConta[i].titular.getNome());           
@@ -49,14 +49,14 @@ public class OperacoesMenu {
 	
 	
 	public void imprimirListaCLientes (Conta [] listaConta) {
-		for(int i = 0; i < listaConta.length; i++) {
-			listaConta[i].titular.printCliente();
-			System.out.println();
-		}
-		
+		for(int i = 0; i < listaConta.length; i++) {		
+			if (listaConta[i] != null) {
+				listaConta[i].titular.imprimirCliente();
+				System.out.println();           
+			}							
+		}		
 	}
-	
-	
+		
 	public Conta[] criarConta(Conta [] listaConta, int id ) {  
 		
 
