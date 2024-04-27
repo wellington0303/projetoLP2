@@ -7,9 +7,9 @@ public class Corrente extends Conta {
 	Corrente(){	
 	}
 	
-	public Corrente(int id, int numero, double saldo, Cliente titular, String tipo, Data dataAbertura, double taxaJuros,
+	public Corrente(int id, int numero, double saldo, String tipo, Data dataAbertura, double taxaJuros,
 			double limiteSaque) {
-		super(id, numero, saldo, titular, tipo, dataAbertura);
+		super(id, numero, saldo, tipo, dataAbertura);
 		this.taxaJuros = taxaJuros;
 		this.limiteSaque = limiteSaque;
 	}
@@ -31,8 +31,8 @@ public class Corrente extends Conta {
 	}
 
 	public boolean sacar(double valor) {
-		
-		if (super.verificarSaldo(valor)){
+
+		if (valor <= saldo) {
 			super.saldo -= valor;
 			return true;
 		} else {
@@ -52,7 +52,7 @@ public class Corrente extends Conta {
 
 	@Override
 	public String toString() {
-		return "ID = " + id + ", Número = " + numero + ", Saldo = " + saldo + ", Titular = " + titular + ", Tipo = " + tipo;
+		return "ID = " + ID + ", Número = " + numero + ", Saldo = " + saldo + ", Titular = " + titular + ", Tipo = " + tipo;
 	}
 	
 }

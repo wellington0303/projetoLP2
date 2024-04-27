@@ -1,5 +1,7 @@
 package projeto;
 
+import java.util.Scanner;
+
 public class Cliente {
 	private int ID;
 	private String nome;
@@ -23,7 +25,7 @@ public class Cliente {
 	
 	public Cliente(int iD, String nome, Endereco endereco, String telefone, String email, int identidade, int rg,
 			double renda, boolean statusConta) {
-		ID = iD;
+		this.ID = iD;
 		this.nome = nome;
 		this.endereco = endereco;
 		this.telefone = telefone;
@@ -39,7 +41,7 @@ public class Cliente {
 	}
 
 	public void setID(int iD) {
-		ID = iD;
+		this.ID = iD;
 	}
 
 	public String getNome() {
@@ -86,24 +88,9 @@ public class Cliente {
 		return statusConta;
 	}
 
-	public boolean criarConta(int ID, Conta [] lista) {  
-
-		// IMPLEMENTAR
-		
-		return false;
-	
-	}
-	
-	public boolean fecharConta(int ID, Conta [] lista) { 
-		
-		// IMPLEMENTAR
-		
-		return false;	
-	}
-
 	public boolean atualizarTelefone(String telefone) {
 		
-		// IMPLEMENTAR
+		this.telefone = telefone;
 		
 		return false;
 		
@@ -111,27 +98,71 @@ public class Cliente {
 	
 	public boolean atualizarEmail(String email) {
 		
-		// IMPLEMENTAR
+		this.email = email;
 		
 		return false;
 		
 	}
 	
-	
 	public boolean atualizarRenda(double renda) {
 		
-		// IMPLEMENTAR
+		this.renda = renda;
 		
 		return false;		
 	}
 
-	public void cadastrarEndereco() {
+	
+	
+	public void cadastrarCliente() {
+		Scanner sc = new Scanner(System.in);
+		Scanner sc_num = new Scanner(System.in);
+		
+		System.out.println("Digite o nome: ");
+		this.nome = sc.nextLine();
+		
+		System.out.println("Digite o telefone: ");
+		this.telefone = sc.nextLine();
+		
+		System.out.println("Digite o email: ");
+		this.email = sc.nextLine();
+		
+		System.out.println("Digite a identidade: ");
+		this.identidade = sc_num.nextInt();
+		
+		System.out.println("Digite o rg: ");
+		this.rg = sc_num.nextInt();
+		
+		System.out.println("Digite a renda: ");
+		this.renda = sc_num.nextDouble();
+		
 		endereco.cadastrarEndereco();
+		
+		statusConta = false;
+		
+		sc.close();
+		sc_num.close();
+	
 	}
+	public void printCliente() {
+		System.out.println("nome: " + nome);
+		
+		System.out.println("telefone: " + telefone);
+		
+		System.out.println("email: " + email);
+		
+		System.out.println("identidade: " + identidade);
+		
+		System.out.println("rg: " + rg);
+		
+		System.out.println("renda: " + renda);
+		
+		endereco.imprimirEndereco();
+	}
+	
 
 	@Override
 	public String toString() {
-		return "ID = " + ID + ", Nome = " + nome + ", Telefone=" + telefone + ", Email=" + email +  ", statusConta=" + statusConta + "]";
+		return "ID = " + ID + ", Nome = " + nome + ", Telefone=" + telefone + ", Email=" + email;
 	}
 	
 }
