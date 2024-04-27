@@ -1,4 +1,5 @@
 package projeto;
+
 import java.util.Scanner;
 
 public class Data {
@@ -6,7 +7,7 @@ public class Data {
 	private int mes;
 	private int ano;
 	
-	Data(){
+	public Data(){
 	}
 	
 	public Data(int dia, int mes, int ano) {
@@ -30,13 +31,18 @@ public class Data {
 
 	public void infoData() {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("informe o dia;");
+		
+		System.out.println("Informe o dia: ");
 		this.dia = scan.nextInt();
-		System.out.println("informe o mes;");
+		
+		System.out.println("Informe o mês: ");
 		this.mes = scan.nextInt();
-		System.out.println("informe o ano;");
+		
+		System.out.println("Informe o ano: ");
 		this.ano = scan.nextInt();
 		
 		scan.close();
 	}
-}
+
+}	
+

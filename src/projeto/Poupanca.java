@@ -8,9 +8,8 @@ public class Poupanca extends Conta {
 	public Poupanca(){
 	}
 	
-	public Poupanca(int id, int numero, double saldo, Cliente titular, String tipo, Data dataAbertura, double taxaJuros,
-			double jurosAcumulados, Data data) {
-		super(id, numero, saldo, titular, tipo, dataAbertura);
+	public Poupanca(int id, int numero, double saldo, Cliente titular, String tipo, Data dataAbertura, double taxaJuros, double jurosAcumulados, Data data) {
+		super(id, numero, saldo, tipo, dataAbertura);
 		this.taxaJuros = taxaJuros;
 		this.jurosAcumulados = jurosAcumulados;
 		this.data = data;
@@ -41,8 +40,11 @@ public class Poupanca extends Conta {
 	}
 
 	public boolean sacar(double valor) {
-		if (super.verificarSaldo(valor)){
-			super.saldo -= valor;
+		
+		double taxa = 5; 
+		
+		if (valor + taxa <= saldo){	
+			super.saldo -= valor + taxa;
 			return true;
 		}else {
 			return false;
@@ -50,19 +52,28 @@ public class Poupanca extends Conta {
 	}
 	
 	public boolean depositar(double valor) {
-		if (valor > 0) {
-			super.saldo += valor;
+		
+		double novoValor = rendimento() * 0.5;
+		
+		if (novoValor > 0) {
+			super.saldo += novoValor;
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
-	public double calcularJuros(Data dataBase) {
+	public int rendimento() {
 		
-		//IMPLEMENTAR 
+		int data1 = super.dataAbertura.getDia() + (super.dataAbertura.getMes() * 30) + (super.dataAbertura.getMes() * 365);
+		int data2 =data.getDia() + (data.getMes() * 30) + (data.getMes() * 365);
 		
-		return 0;
+		int quantidadeDias = data2 - data1;
+		return quantidadeDias;
+				 
+				
+		
+		
 	}
 }
 
