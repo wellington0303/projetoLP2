@@ -29,9 +29,7 @@ public class Data {
 		return ano;
 	}
 
-	public void infoData() {
-		Scanner scan = new Scanner(System.in);
-		
+	public void infoData(Scanner scan) {	
 		System.out.println("Informe o dia: ");
 		this.dia = scan.nextInt();
 		
@@ -41,7 +39,6 @@ public class Data {
 		System.out.println("Informe o ano: ");
 		this.ano = scan.nextInt();
 		
-		scan.close();
 	}
 
 }	

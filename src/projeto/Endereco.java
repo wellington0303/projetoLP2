@@ -46,31 +46,26 @@ public class Endereco {
 		return cep;
 	}
 
-	public void cadastrarEndereco() {
-	
-		Scanner scan = new Scanner(System.in);
-		Scanner scan_num = new Scanner(System.in);
+	public void cadastrarEndereco(Scanner sc, Scanner sc_num) {
 		
 		System.out.println("Informe o logradouro: ");
-		this.logradouro = scan.nextLine();
+		this.logradouro = sc.nextLine();
 		
 		System.out.println("Informe o bairro: ");
-		this.bairro = scan.nextLine();
+		this.bairro = sc.nextLine();
 		
 		System.out.println("Informe o cidade: ");
-		this.cidade = scan.nextLine();
+		this.cidade = sc.nextLine();
 		
 		System.out.println("Informe o estado: ");
-		this.estado = scan.nextLine();
+		this.estado = sc.nextLine();
 		
 		System.out.println("Informe o numero: ");
-		this.numero = scan_num.nextInt();
+		this.numero = sc_num.nextInt();
 		
 		System.out.println("Informe o cep: ");
-		this.cep = scan.nextLine();
-		
-		scan.close();
-		scan_num.close();
+		this.cep = sc.nextLine();		
+
 	}
 	
 	public void imprimirEndereco() {

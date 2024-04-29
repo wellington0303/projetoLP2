@@ -13,57 +13,78 @@ public class Main {
 		boolean operacao = false;
 		OperacoesMenu opcoes = new OperacoesMenu();
 		
-		Cliente [] listaClientes = new Cliente[quantidadeClientes];
 		Conta [] listaContas = new Conta[quantidadeClientes];
+			
+		listaContas[0] = new Corrente(1, 0, new Data (1,1,2001));
+		listaContas[0].setTitular(new Cliente(1,"Fulano 1", new Endereco("Rua A", 123, "Bairro X", "Cidade Y", "Estado Z", "12345-678"), "123456789", "fulano1@example.com", 123456, 789012, 1000.00));
+
+		listaContas[1] = new Poupanca(2, 0, new Data (1,1,2002));
+		listaContas[1].setTitular(new Cliente(2,"Fulano 2", new Endereco("Rua B", 456, "Bairro Y", "Cidade Z", "Estado W", "98765-432"), "987654321", "fulano2@example.com", 654321, 210987, 2000.00));
+			
+		listaContas[2] = new Investimento(3, 0, new Data (1,1,2003));
+		listaContas[2].setTitular(new Cliente(3,"Fulano 3", new Endereco("Rua C", 789, "Bairro Z", "Cidade X", "Estado V", "54321-876"), "135792468", "fulano3@example.com", 246813, 579135, 3000.00));
 		
 		do {
 			
 			opcoes.menu();
 			op = sc_num.nextInt();
 				
-			if (op != 0 && op != 1 && op<14) {
-				idSelecionado = opcoes.selecaoID(listaClientes, quantidadeClientes, sc_num);
-			}
-			
-			
+			if (op != 0 && op !=2 && op<14 && op != 1) {
+				idSelecionado = opcoes.selecaoID(listaContas, sc_num);
+			} 
+					
 			switch(op) {
 			
 				case 0:
 					
 					System.out.println("OBRIGADO POR UTILIZAR NOSSOS SERVIÇOS! ATENDIMENTO ENCERRADO");
 					break;
-					
+									
 				case 1: 
 					
-					listaClientes[idControle] = new Cliente();
-					listaClientes[idControle] = listaClientes[idControle].cadastrarCliente(idControle, sc, sc_num);				
-					System.out.println("Operação realizada com sucesso!");
-					
-					idControle ++;	
-					
-					break; 
-					
+					if(listaContas[0] == null) {
+						System.out.println("É necessário criar uma conta antes de cadastrar o cliente");
+						
+					} else {				
+						
+						idSelecionado = opcoes.selecaoID(listaContas, sc_num);
+						listaContas[idSelecionado].titular.cadastrarCliente(idSelecionado+1,sc, sc_num);		
+						System.out.println("Operação realizada com sucesso!");
+					}								
+					break;
+								
 				case 2:
 					
-					if (listaClientes[idSelecionado].criarConta(idSelecionado, listaContas)) {
+					System.out.println("SELECIONE O TIPO: ");
+					System.out.println("C - Corrente");
+					System.out.println("P - Poupança");
+					System.out.println("I - Investimento");
+					char tipo = sc.nextLine().toUpperCase().charAt(0);
+					
+					System.out.println("DIGITE A DATA DE ABERTURA: ");
+					Data dataAbertura = new Data();
+					dataAbertura.infoData(sc_num);			
+										
+					if (opcoes.criarConta(listaContas, idControle,tipo, dataAbertura)) {
 						System.out.println("Operação realizada com sucesso!");
 					} else {
 						System.out.println("Não foi possível criar a conta!");			
-					}						
+					}
+					idControle ++;					
 					break;
 						
 				case 3:				
 			
-					if (listaClientes[idSelecionado].fecharConta(idSelecionado, listaContas)) {
+					if (opcoes.fecharConta(listaContas, idSelecionado)) {
 						System.out.println("Operação realizada com sucesso!");			
 					} else {
 						System.out.println("Não foi possível fechar a conta!");				
 					}					
 					break;
-							
+							 
 				case 4:
 					
-					listaClientes[idSelecionado].cadastrarEndereco(sc, sc_num);
+					listaContas[idSelecionado].titular.cadastrarEndereco(sc, sc_num);
 					System.out.println("Operação realizada com sucesso!");						
 					break;
 						
@@ -72,11 +93,7 @@ public class Main {
 					System.out.println("Digite o telefone: ");
 					String telefone = sc.nextLine();
 					
-					if (listaClientes[idSelecionado].atualizarTelefone(telefone)) {
-						System.out.println("Operação realizada com sucesso!");	
-					} else {
-						System.out.println("Não foi possível atualizar o telefone!");				
-					}												
+					listaContas[idSelecionado].titular.atualizarTelefone(telefone);
 					break;
 						
 				case 6:
@@ -84,31 +101,24 @@ public class Main {
 					System.out.println("Digite o email: ");
 					String email = sc.nextLine();
 					
-					if (listaClientes[idSelecionado].atualizarEmail(email)) {
-						System.out.println("Operação realizada com sucesso!");	
-					} else {
-						System.out.println("Não foi possível atualizar o email");				
-					}					
-					break; 
+					listaContas[idSelecionado].titular.atualizarEmail(email);
+					break;
 					
 				case 7:
 					
 					System.out.println("Digite a renda: ");
 					double renda = sc_num.nextDouble();
 					
-					if (listaClientes[idSelecionado].atualizarRenda(renda)) {
-						System.out.println("Operação realizada com sucesso!");
-					} else {
-						System.out.println("Não foi possível atualizar a renda");		
-					}				
-					break; 
+					listaContas[idSelecionado].titular.atualizarRenda(renda);
+					break;
+					
 											
 				case 8:
 														
 					double valorSaldo = listaContas[idSelecionado].verificarSaldo();
 					System.out.println("O saldo disponível é de " + valorSaldo + " reais.");			
 					break;
-					
+						
 				case 9:
 					
 					System.out.println("Digite o valor que deseja depositar: ");
@@ -134,7 +144,7 @@ public class Main {
 					    System.out.println("Tipo de conta inválido para depósito!");
 					}
 					break;
-														
+				
 				case 10:
 					
 					System.out.println("Digite o valor que deseja sacar: ");
@@ -165,18 +175,15 @@ public class Main {
 																
 					if (listaContas[idSelecionado] instanceof Investimento || listaContas[idSelecionado] instanceof Poupanca) {
 						double valorJuros;
-						
-						Data dataBase = new Data();
-						dataBase.infoData(sc_num);
 											    	
 					    if (listaContas[idSelecionado] instanceof Investimento) {
 							Investimento lista = (Investimento)listaContas[idSelecionado];
-							valorJuros = lista.calcularJuros(dataBase);
+							valorJuros = lista.calcularJuros(sc_num);
 						} else {
 							Poupanca lista = (Poupanca)listaContas[idSelecionado];
-							valorJuros = lista.calcularJuros(dataBase);
+							valorJuros = lista.calcularJuros(sc_num);
 						}
-					    System.out.println("O valor total dos juros até a data indicada é de " + valorJuros + " reais");	        
+					    System.out.printf("O valor total dos juros até a data indicada é de %.2f reais \n", valorJuros);        
 					    
 					} else {
 					    System.out.println("Tipo de conta inválido para calcular os juros!");
@@ -220,12 +227,12 @@ public class Main {
 					    System.out.println("Tipo de conta inválido para o resgate");
 					}
 					break;
-					
+						
 				case 14:
 					
-					opcoes.imprimirListaCLientes(listaClientes, quantidadeClientes);
-					break;
-							
+					opcoes.imprimirListaCLientes(listaContas);
+					break;	
+						
 				default:
 					
 					System.out.println("OPERAÇÃO INVÁLIDA, ESCOLHA NOVAMENTE");

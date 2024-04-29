@@ -5,26 +5,28 @@ import java.util.Scanner;
 public class Cliente {
 	private int ID;
 	private String nome;
-	private	Endereco endereco;
+	private Endereco endereco;
 	private String telefone;
 	private String email;
 	private int identidade;
 	private int rg;
 	private double renda;	
-	private boolean statusConta;
 	
 	public Cliente() {
 		
 	}
 	
+	/* VER SE É NECESSÁRIO
 	public Cliente(String nome, int identidade, int rg ) {
 		this.nome = nome;
 		this.identidade = identidade;
 		this.rg = rg;
 	}
 	
+	 */
+	
 	public Cliente(int iD, String nome, Endereco endereco, String telefone, String email, int identidade, int rg,
-			double renda, boolean statusConta) {
+			double renda) {
 		this.ID = iD;
 		this.nome = nome;
 		this.endereco = endereco;
@@ -33,13 +35,16 @@ public class Cliente {
 		this.identidade = identidade;
 		this.rg = rg;
 		this.renda = renda;
-		this.statusConta = statusConta;
 	}
 	
 	public int getID() {
 		return ID;
 	}
 
+	public void setID(int ID) {
+		this.ID = ID;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -68,10 +73,6 @@ public class Cliente {
 		return renda;
 	}
 
-	public boolean isStatusConta() {
-		return statusConta;
-	}
-
 	public void atualizarTelefone(String telefone) {	
 		this.telefone = telefone;	
 	}
@@ -85,9 +86,7 @@ public class Cliente {
 		this.renda = renda;
 	}
 
-	public void cadastrarCliente(int ID) {
-		Scanner sc = new Scanner(System.in);
-		Scanner sc_num = new Scanner(System.in);
+	public void cadastrarCliente(int ID, Scanner sc, Scanner sc_num) {
 		
 		this.ID = ID;
 		
@@ -109,12 +108,8 @@ public class Cliente {
 		System.out.println("Digite a renda: ");
 		this.renda = sc_num.nextDouble();
 		
-		endereco.cadastrarEndereco();
-		
-		statusConta = false;
-		
-		sc.close();
-		sc_num.close();
+		this.endereco = new Endereco();
+		endereco.cadastrarEndereco(sc, sc_num);
 	
 	}
 	
@@ -127,6 +122,10 @@ public class Cliente {
 		System.out.println("RG: " + rg);	
 		System.out.println("Renda: " + renda);		
 		endereco.imprimirEndereco();
+	}
+	
+	public void cadastrarEndereco(Scanner sc, Scanner sc_num) {		
+		endereco.cadastrarEndereco(sc, sc_num);
 	}
 
 }

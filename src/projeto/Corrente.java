@@ -7,8 +7,8 @@ public class Corrente extends Conta {
 	Corrente(){	
 	}
 	
-	public Corrente(int id, int numero, double saldo, String tipo, Data dataAbertura) {
-		super(id, numero, saldo, tipo, dataAbertura);
+	public Corrente(int id, double saldo, Data dataAbertura) {
+		super(id, saldo, dataAbertura);
 		this.taxaJuros = 5;
 		this.limiteSaque = 1000;
 	}
@@ -47,7 +47,7 @@ public class Corrente extends Conta {
 
 	@Override
 	public String toString() {
-		return "ID = " + ID + ", Número = " + numero + ", Saldo = " + saldo + ", Titular = " + titular + ", Tipo = " + tipo;
+		return "ID = " + ID + ", Saldo = " + saldo + ", Titular = " + titular;
 	}
 	
 }

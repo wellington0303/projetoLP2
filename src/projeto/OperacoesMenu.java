@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class OperacoesMenu {
 		
 	public void menu() {
-		System.out.println("OLÁ CLIENTE, PARA COMEÇAR, SELECIONE A OPÇÃO: ");
+		System.out.println("SELECIONE A OPÇÃO: ");
 		System.out.println("1 - Cadastrar cliente");
 		System.out.println("2 - Criar conta");
 		System.out.println("3 - Fechar conta");
@@ -19,59 +19,91 @@ public class OperacoesMenu {
 		System.out.println("11 - Calcular juros acumulados (Poupança ou Investimento)");
 		System.out.println("12 - Investir (Investimento)");
 		System.out.println("13 - Resgatar (Investimento)");
-		System.out.println("14 - Imprimir lista de clientes)");
+		System.out.println("14 - Imprimir lista de clientes");
 		System.out.println("0 - FINALIZAR OPERAÇÕES");
 	}
 	
-	public int selecaoID (Conta [] listaConta, Scanner sc) {
+	public int selecaoID (Conta [] listaConta, Scanner sc_num) {
 		
 		for (int i = 0; i< listaConta.length; i++) {
 			
-			if (listaConta[i] != null) {
-				System.out.println("ID CLIENTE: " + listaConta[i].getID() + " | NOME CLIENTE: " + listaConta[i].titular.getNome());           
-			}
+			if (listaConta[i] != null && listaConta[i].titular != null) {
+				System.out.println("ID CONTA: " + listaConta[i].getID() + " | NOME CLIENTE: " + listaConta[i].titular.getNome());           
+			} 
 		}
 		
-		System.out.println("Digite o ID do cliente: ");	
-		int idSelecionado = sc.nextInt();
+		System.out.println("Digite o ID da conta: ");	
+		int idSelecionado = sc_num.nextInt();
 		
 		idSelecionado --;
 		
-		while (listaConta[idSelecionado].getID() != idSelecionado+1) {
+		while (listaConta[idSelecionado] == null) {
 			
 			System.out.println("ID INVÁLIDO! Digite um novo valor: ");	
-			idSelecionado = sc.nextInt();
+			idSelecionado = sc_num.nextInt();
 			
 			idSelecionado --;		
 		}
-		return idSelecionado;
+		
+		return idSelecionado;	
 	}
-	
-	
+		
 	public void imprimirListaCLientes (Conta [] listaConta) {
+		
+		System.out.println("------------------------------------------------------------");
+		System.out.println("LISTA DE CLIENTES: ");
+		System.out.println();
+		
 		for(int i = 0; i < listaConta.length; i++) {		
-			if (listaConta[i] != null) {
+			if (listaConta[i] != null && listaConta[i].titular.getNome() != null) {
 				listaConta[i].titular.imprimirCliente();
 				System.out.println();           
 			}							
 		}		
+		System.out.println("------------------------------------------------------------");
 	}
 		
-	public Conta[] criarConta(Conta [] listaConta, int id ) {  
+	public boolean criarConta(Conta [] listaConta, int idControle, char tipo, Data data) {  		
 		
-
-		Conta novaConta = new Conta();
-
-		listaConta[id + 1] = novaConta;
-		return listaConta;
+		if (tipo == 'C') {
+			Corrente novaConta = new Corrente(idControle+1, 0, data);
+			listaConta[idControle] = novaConta;
+			return true;
+			
+		} else if (tipo == 'P') {			
+			Poupanca novaConta = new Poupanca(idControle+1, 0, data);
+			listaConta[idControle] = novaConta;
+			return true;
+			
+		} else if (tipo == 'I') {
+			Investimento novaConta = new Investimento(idControle+1, 0, data);
+			listaConta[idControle] = novaConta;
+			return true;
+		}		
+		else {
+			return false;
+		}	
 	}
-	
-	public boolean fecharConta(int ID, Conta [] lista) { 
 		
-		for (int i = ID + 1; i < lista.length; i++) {
-			lista[i].ID = lista[i].ID - 1;
-			lista[i - 1] = lista[i];
+	public boolean fecharConta(Conta [] listaConta, int idSelecionado) { 
+		
+		if (listaConta[idSelecionado] != null) {	
+			
+			for (int i = idSelecionado; i < listaConta.length-1; i++) {
+				
+				listaConta[i] = listaConta[i+1];
+				if (listaConta[i] != null) {
+					listaConta[i].setID(i+1);		
+					if (listaConta[i].titular.getNome() != null) {
+						listaConta[i].titular.setID(i+1);
+					}			
+				}				
+			}			
+			return true;
+			
+		} else{
+			return false;
 		}
-		return true;
 	}
+		
 }

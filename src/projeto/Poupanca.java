@@ -1,5 +1,7 @@
 package projeto;
 
+import java.util.Scanner;
+
 public class Poupanca extends Conta {
 	private double taxaJuros;
 	private double rendimentoMensal;
@@ -10,12 +12,13 @@ public class Poupanca extends Conta {
 	public Poupanca(){
 	}
 	
-	public Poupanca(int id, int numero, double saldo, Cliente titular, String tipo, Data dataAbertura) {
-		super(id, numero, saldo, tipo, dataAbertura);
+	public Poupanca(int id, double saldo, Data dataAbertura) {
+		super(id, saldo, dataAbertura);
 		this.taxaJuros = 10;
 		this.rendimentoMensal = 0.5;
 		this.jurosAcumulados = 0;
 		this.limiteSaque = 800;
+		this.data = new Data();
 	}
 
 	public double getTaxaJuros() {
@@ -58,28 +61,33 @@ public class Poupanca extends Conta {
 		}
 	}
 	
-	public double calcularJuros() {
+	public double calcularJuros(Scanner sc_num) {
 	
-		data.infoData();
+		data.infoData(sc_num);
 		
 		int data1 = super.dataAbertura.getDia() + (super.dataAbertura.getMes() * 30) + (super.dataAbertura.getAno() * 365);
 		int data2 = data.getDia() + (data.getMes() * 30) + (data.getAno()* 365);
 		
 		int quantidadeDias = data2 - data1;
-				
-	    double rendimentoDiario = (Math.pow(1 + rendimentoMensal, 1.0 / 30) - 1)/100;
-	    
-	    double saldoFinal = saldo * (1 + rendimentoDiario*quantidadeDias);
-	    
-	    this.jurosAcumulados = saldoFinal - saldo;
-	    
-	    return jurosAcumulados;
 		
-	}
+		if (quantidadeDias<= 0) {	 
+			return 0;
+			
+		} else {
+			 double rendimentoDiario = (Math.pow(1 + rendimentoMensal, 1.0 / 30) - 1)/100;
+			    
+			    double saldoFinal = saldo * (1 + rendimentoDiario*quantidadeDias);
+			    		    
+			    this.jurosAcumulados = saldoFinal - saldo;
+			    
+			    return jurosAcumulados;
+		}				   
+		
+	}	
 	
 	@Override
 	public String toString() {
-		return "ID = " + ID + ", Número = " + numero + ", Saldo = " + saldo + ", Titular = " + titular + ", Tipo = " + tipo;
+		return "ID = " + ID + ", Saldo = " + saldo + ", Titular = " + titular;
 	}
 }
 
