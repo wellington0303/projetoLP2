@@ -16,15 +16,6 @@ public class Cliente {
 		
 	}
 	
-	/* VER SE É NECESSÁRIO
-	public Cliente(String nome, int identidade, int rg ) {
-		this.nome = nome;
-		this.identidade = identidade;
-		this.rg = rg;
-	}
-	
-	 */
-	
 	public Cliente(int iD, String nome, Endereco endereco, String telefone, String email, int identidade, int rg,
 			double renda) {
 		this.ID = iD;

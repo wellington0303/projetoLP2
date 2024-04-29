@@ -9,19 +9,19 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		Scanner sc_num = new Scanner(System.in);
 		
-		int op, idSelecionado = 0, idControle = 0, quantidadeClientes = 100; 
+		int op, idSelecionado = 0, idControle = 3, quantidadeClientes = 100; 
 		boolean operacao = false;
 		OperacoesMenu opcoes = new OperacoesMenu();
 		
 		Conta [] listaContas = new Conta[quantidadeClientes];
 			
-		listaContas[0] = new Corrente(1, 0, new Data (1,1,2001));
+		listaContas[0] = new Corrente(1, new Data (1,1,2021));
 		listaContas[0].setTitular(new Cliente(1,"Fulano 1", new Endereco("Rua A", 123, "Bairro X", "Cidade Y", "Estado Z", "12345-678"), "123456789", "fulano1@example.com", 123456, 789012, 1000.00));
 
-		listaContas[1] = new Poupanca(2, 0, new Data (1,1,2002));
+		listaContas[1] = new Poupanca(2, new Data (1,1,2022));
 		listaContas[1].setTitular(new Cliente(2,"Fulano 2", new Endereco("Rua B", 456, "Bairro Y", "Cidade Z", "Estado W", "98765-432"), "987654321", "fulano2@example.com", 654321, 210987, 2000.00));
 			
-		listaContas[2] = new Investimento(3, 0, new Data (1,1,2003));
+		listaContas[2] = new Investimento(3, new Data (1,1,2023));
 		listaContas[2].setTitular(new Cliente(3,"Fulano 3", new Endereco("Rua C", 789, "Bairro Z", "Cidade X", "Estado V", "54321-876"), "135792468", "fulano3@example.com", 246813, 579135, 3000.00));
 		
 		do {
@@ -79,7 +79,8 @@ public class Main {
 						System.out.println("Operação realizada com sucesso!");			
 					} else {
 						System.out.println("Não foi possível fechar a conta!");				
-					}					
+					}
+					idControle --;
 					break;
 							 
 				case 4:

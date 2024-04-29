@@ -12,8 +12,8 @@ public class Poupanca extends Conta {
 	public Poupanca(){
 	}
 	
-	public Poupanca(int id, double saldo, Data dataAbertura) {
-		super(id, saldo, dataAbertura);
+	public Poupanca(int id, Data dataAbertura) {
+		super(id, dataAbertura);
 		this.taxaJuros = 10;
 		this.rendimentoMensal = 0.5;
 		this.jurosAcumulados = 0;
@@ -75,10 +75,8 @@ public class Poupanca extends Conta {
 			
 		} else {
 			 double rendimentoDiario = (Math.pow(1 + rendimentoMensal, 1.0 / 30) - 1)/100;
-			    
-			    double saldoFinal = saldo * (1 + rendimentoDiario*quantidadeDias);
 			    		    
-			    this.jurosAcumulados = saldoFinal - saldo;
+			    this.jurosAcumulados = saldo * (rendimentoDiario*quantidadeDias);
 			    
 			    return jurosAcumulados;
 		}				   

@@ -11,8 +11,8 @@ public class Investimento extends Conta{
 	public Investimento(){		
 	}
 	
-	public Investimento(int id, double saldo, Data dataAbertura) {
-		super(id, saldo, dataAbertura);
+	public Investimento(int id, Data dataAbertura) {
+		super(id, dataAbertura);
 		this.taxaJuros = 15;
 		this.rendimentoMensal = 1;
 		this.jurosAcumulados = 0;
@@ -70,11 +70,9 @@ public class Investimento extends Conta{
 		} else {
 			 double rendimentoDiario = (Math.pow(1 + rendimentoMensal, 1.0 / 30) - 1)/100;
 			    
-			    double saldoFinal = saldo * (1 + rendimentoDiario*quantidadeDias);
-		    		    
-			    this.jurosAcumulados = saldoFinal - saldo;			    
+			 this.jurosAcumulados = saldo * (rendimentoDiario*quantidadeDias);    
 
-			    return jurosAcumulados;
+			  return jurosAcumulados;
 		}
 			
 	}

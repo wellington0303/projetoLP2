@@ -7,8 +7,8 @@ public class Corrente extends Conta {
 	Corrente(){	
 	}
 	
-	public Corrente(int id, double saldo, Data dataAbertura) {
-		super(id, saldo, dataAbertura);
+	public Corrente(int id, Data dataAbertura) {
+		super(id, dataAbertura);
 		this.taxaJuros = 5;
 		this.limiteSaque = 1000;
 	}

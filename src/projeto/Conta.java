@@ -10,14 +10,7 @@ public class Conta {
 	public Conta(){
 	}
 	
-	/*
-	 VER SE É NECESSÁRIO
-	public Conta(int id){	
-		this.ID = this.titular.getID();
-	}
-	*/
-	
-	public Conta(int id, double saldo,  Data dataAbertura) {
+	public Conta(int id, Data dataAbertura) {
 		super();
 		this.ID = id;
 		this.saldo = 0;
@@ -47,6 +40,9 @@ public class Conta {
 	}
 	public double verificarSaldo() {
 		return saldo;
+	}
+	public void imprimirData() {
+		System.out.println("Data de abertura: " + dataAbertura.getDia() + "/" + dataAbertura.getMes() + "/" + dataAbertura.getAno());
 	}
 	
 }

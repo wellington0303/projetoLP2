@@ -18,7 +18,7 @@ public class OperacoesMenu {
 		System.out.println("10 - Realizar saque (Corrente ou Poupança)");
 		System.out.println("11 - Calcular juros acumulados (Poupança ou Investimento)");
 		System.out.println("12 - Investir (Investimento)");
-		System.out.println("13 - Resgatar (Investimento)");
+		System.out.println("13 - Resgatar (Investsimento)");
 		System.out.println("14 - Imprimir lista de clientes");
 		System.out.println("0 - FINALIZAR OPERAÇÕES");
 	}
@@ -57,6 +57,7 @@ public class OperacoesMenu {
 		for(int i = 0; i < listaConta.length; i++) {		
 			if (listaConta[i] != null && listaConta[i].titular.getNome() != null) {
 				listaConta[i].titular.imprimirCliente();
+				listaConta[i].imprimirData();
 				System.out.println();           
 			}							
 		}		
@@ -66,17 +67,17 @@ public class OperacoesMenu {
 	public boolean criarConta(Conta [] listaConta, int idControle, char tipo, Data data) {  		
 		
 		if (tipo == 'C') {
-			Corrente novaConta = new Corrente(idControle+1, 0, data);
+			Corrente novaConta = new Corrente(idControle+1, data);
 			listaConta[idControle] = novaConta;
 			return true;
 			
 		} else if (tipo == 'P') {			
-			Poupanca novaConta = new Poupanca(idControle+1, 0, data);
+			Poupanca novaConta = new Poupanca(idControle+1, data);
 			listaConta[idControle] = novaConta;
 			return true;
 			
 		} else if (tipo == 'I') {
-			Investimento novaConta = new Investimento(idControle+1, 0, data);
+			Investimento novaConta = new Investimento(idControle+1, data);
 			listaConta[idControle] = novaConta;
 			return true;
 		}		
