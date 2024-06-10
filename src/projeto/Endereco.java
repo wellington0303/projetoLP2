@@ -10,6 +10,9 @@ public class Endereco {
 	private String estado;
 	private String cep;
 	
+	Scanner sc = new Scanner(System.in);
+	Scanner sc_num = new Scanner(System.in);
+	
 	public Endereco () {
 	}
 	
@@ -46,7 +49,7 @@ public class Endereco {
 		return cep;
 	}
 
-	public void cadastrarEndereco(Scanner sc, Scanner sc_num) {
+	public void cadastrarEndereco() {
 		
 		System.out.println("Informe o logradouro: ");
 		this.logradouro = sc.nextLine();

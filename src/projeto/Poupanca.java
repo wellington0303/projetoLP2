@@ -1,14 +1,10 @@
 package projeto;
 
-import java.util.Scanner;
-
 public class Poupanca extends Conta {
 	private double taxaJuros;
 	private double rendimentoMensal;
-	private double jurosAcumulados;
-	double limiteSaque;
-	private Data data; 
-	
+	private double limiteSaque;
+
 	public Poupanca(){
 	}
 	
@@ -16,9 +12,7 @@ public class Poupanca extends Conta {
 		super(id, dataAbertura);
 		this.taxaJuros = 10;
 		this.rendimentoMensal = 0.5;
-		this.jurosAcumulados = 0;
 		this.limiteSaque = 800;
-		this.data = new Data();
 	}
 
 	public double getTaxaJuros() {
@@ -32,38 +26,35 @@ public class Poupanca extends Conta {
 	public double getLimiteSaque() {
 		return limiteSaque;
 	}
-
-	public Data getData() {
-		return data;
-	}
-
-	public boolean sacar(double valor) {
+	@Override
+	public void sacar(double valor) {
 		
 		double valorSaque = valor + taxaJuros;
 		
 		if (valorSaque <= saldo && valor <= limiteSaque){	
 			super.saldo -= valorSaque;
-			return true;
+			System.out.println("Saque realizado com sucesso! Novo saldo: " + saldo);
 			
 		}else {
-			return false;
+			System.out.println("Não foi possível realizar o saque!");
 		}
 	}
-	
-	public boolean depositar(double valor) {
+	@Override
+	public void depositar(double valor) {
 		
 		if (valor > 0) {
 			super.saldo += valor;
-			return true;
+			System.out.println("Depósito realizado com sucesso! Novo saldo: " + saldo);
 			
 		} else {
-			return false;
+			System.out.println("Não foi possível realizar o saque! O valor inserido é inválido");
 		}
 	}
-	
-	public double calcularJuros(Scanner sc_num) {
-	
-		data.infoData(sc_num);
+
+	public double calcularJuros() {
+		
+		Data data = new Data();
+		data.infoData();
 		
 		int data1 = super.dataAbertura.getDia() + (super.dataAbertura.getMes() * 30) + (super.dataAbertura.getAno() * 365);
 		int data2 = data.getDia() + (data.getMes() * 30) + (data.getAno()* 365);
@@ -75,10 +66,7 @@ public class Poupanca extends Conta {
 			
 		} else {
 			 double rendimentoDiario = (Math.pow(1 + rendimentoMensal, 1.0 / 30) - 1)/100;
-			    		    
-			    this.jurosAcumulados = saldo * (rendimentoDiario*quantidadeDias);
-			    
-			    return jurosAcumulados;
+			 return saldo * (rendimentoDiario*quantidadeDias);
 		}				   
 		
 	}	

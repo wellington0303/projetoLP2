@@ -1,8 +1,8 @@
 package projeto;
 
-public class Corrente extends Conta {
-	double taxaJuros;
-	double limiteSaque;
+public class Corrente extends Conta{
+	private double taxaJuros;
+	private double limiteSaque;
 	
 	Corrente(){	
 	}
@@ -20,28 +20,28 @@ public class Corrente extends Conta {
 	public double getLimiteSaque() {
 		return limiteSaque;
 	}
-
-	public boolean sacar(double valor) {
+	@Override
+	public void sacar(double valor) {
 		
 		double novoValor = valor + taxaJuros;
 
 		if (novoValor <= saldo && valor <= limiteSaque) {
 			super.saldo -= novoValor;
-			return true;
+			System.out.println("Saque realizado com sucesso! Novo saldo: " + saldo);
 			
 		} else {
-			return false;
+			System.out.println("Não foi possível realizar o saque!");
 		}
 	}
-
-	public  boolean depositar(double valor) {
+	@Override
+	public void depositar(double valor) {
 		
 		if (valor > 0) {
 			super.saldo += valor;
-			return true;
+			System.out.println("Depósito realizado com sucesso! Novo saldo: " + saldo);
 			
 		} else {
-			return false;
+			System.out.println("Não foi possível realizar o saque! O valor inserido é inválido");
 		}
 	}
 
